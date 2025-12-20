@@ -1,0 +1,20 @@
+name: tailscale
+
+services:
+  tailscale:
+    image: tailscale/tailscale:latest # https://tailscale.com/kb/1282/docker
+    container_name: tailscale
+    hostname: tailscale
+    restart: unless-stopped
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY}
+      - TS_EXTRA_ARGS=--advertise-tags=tag:container
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_USERSPACE=false
+    volumes:
+      - ${PWD}/tailscale/state:/var/lib/tailscale
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW

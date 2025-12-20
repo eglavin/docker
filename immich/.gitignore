@@ -1,0 +1,9 @@
+# Ignore everything
+*
+
+# Except these files
+!.gitignore
+!.env.example
+!docker-compose.yml
+!README.md
+!hwaccel.transcoding.yml

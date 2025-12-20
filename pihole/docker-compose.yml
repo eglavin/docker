@@ -1,0 +1,23 @@
+name: pihole
+
+services:
+  pihole:
+    image: jacklul/pihole:latest # https://github.com/jacklul/pihole-updatelists https://github.com/pi-hole/docker-pi-hole
+    container_name: pihole
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - WEBPASSWORD=${WEBPASSWORD}
+      - TZ=${TZ}
+      - DNSSEC=true
+      - PIHOLE_DNS_=${PIHOLE_DNS}
+    volumes:
+      - ./etc-pihole/:/etc/pihole/
+      - ./etc-pihole-updatelists/:/etc/pihole-updatelists/
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 67:67/udp
+      - 80:80/tcp
+      - 443:443/tcp

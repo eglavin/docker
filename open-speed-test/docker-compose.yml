@@ -1,0 +1,10 @@
+name: open-speed-test
+
+services:
+  open-speed-test:
+    image: openspeedtest/latest # https://hub.docker.com/r/openspeedtest/latest
+    container_name: open-speed-test
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+      - "3001:3001"

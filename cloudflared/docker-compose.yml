@@ -1,0 +1,9 @@
+name: cloudflare-tunnel
+
+services:
+  cloudflared-tunnel:
+    image: cloudflare/cloudflared:latest # https://hub.docker.com/r/cloudflare/cloudflared
+    container_name: cloudflared-tunnel
+    restart: unless-stopped
+    command: tunnel run
+    env_file: .env

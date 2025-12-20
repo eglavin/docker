@@ -1,0 +1,10 @@
+# Ignore everything
+*
+
+# Except these files
+!.gitignore
+!.env.example
+!docker-compose.yml
+!README.md
+!/etc-pihole-updatelists/
+!/etc-pihole-updatelists/pihole-updatelists.conf

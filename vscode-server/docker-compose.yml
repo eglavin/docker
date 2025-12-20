@@ -1,0 +1,19 @@
+name: vscode-server
+
+services:
+  openvscode-server:
+    image: lscr.io/linuxserver/openvscode-server:latest # https://hub.docker.com/r/linuxserver/openvscode-server
+    container_name: openvscode-server
+    restart: unless-stopped
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      # - CONNECTION_TOKEN= #optional
+      # - CONNECTION_SECRET= #optional
+      - SUDO_PASSWORD=${SUDO_PASSWORD} #optional
+      # - SUDO_PASSWORD_HASH= #optional
+    volumes:
+      - ./data:/config
+    ports:
+      - 3100:3000
