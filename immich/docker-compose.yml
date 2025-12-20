@@ -9,6 +9,7 @@ services:
       service: quicksync # set to one of [nvenc, quicksync, rkmpp, vaapi, vaapi-wsl] for accelerated transcoding
     volumes:
       - ${UPLOAD_LOCATION}:/usr/src/app/upload
+      - ${EXTERNAL_LIBRARY_PATH}:/home/user/photos1:ro
       - /etc/localtime:/etc/localtime:ro
     env_file:
       - .env
