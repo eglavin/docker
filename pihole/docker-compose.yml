@@ -9,9 +9,13 @@ services:
       - NET_ADMIN
     environment:
       - TZ=${TZ}
+      - PIHOLE_UID=${PUID}
+      - PIHOLE_GID=${PGID}
       - FTLCONF_dns_dnssec=true
       - FTLCONF_dns_upstreams=${FTLCONF_dns_upstreams}
       - FTLCONF_webserver_api_password=${FTLCONF_webserver_api_password}
+      - FTLCONF_dns_listeningMode=ALL
+      - CRONTAB_STRING="25 2 * * 6"
     volumes:
       - ./etc-pihole/:/etc/pihole/
       - ./etc-pihole-updatelists/:/etc/pihole-updatelists/
