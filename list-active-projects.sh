@@ -15,7 +15,8 @@ fi
 
 # Sort paths for stable output (preserve filenames with spaces)
 oldIFS=$IFS
-IFS=$'\n' compose_files=($(printf '%s\n' "${compose_files[@]}" | sort))
+IFS=$'\n'
+compose_files=($(printf '%s\n' "${compose_files[@]}" | sort))
 IFS=$oldIFS
 
 printf '%-60s %-8s\n' "PROJECT" "STATUS"
@@ -23,13 +24,13 @@ printf '%-60s %-8s\n' "---------------------------------------------------------
 
 for file in "${compose_files[@]}"; do
   dir=$(dirname "$file")
-  ids=$(docker compose -f "$file" ps -q 2>/dev/null || true)
+  container_ids=$(docker compose -f "$file" ps -q 2>/dev/null || true)
   running=0
 
-  if [ -n "$ids" ]; then
-    for id in $ids; do
-      st=$(docker inspect -f '{{.State.Status}}' "$id" 2>/dev/null || echo unknown)
-      if [ "$st" = "running" ]; then
+  if [ -n "$container_ids" ]; then
+    for id in $container_ids; do
+      current_state=$(docker inspect -f '{{.State.Status}}' "$id" 2>/dev/null || echo unknown)
+      if [ "$current_state" = "running" ]; then
         running=$((running+1))
       fi
     done

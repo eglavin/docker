@@ -15,7 +15,8 @@ fi
 
 # Sort paths for stable output (preserve filenames with spaces)
 oldIFS=$IFS
-IFS=$'\n' compose_files=($(printf '%s\n' "${compose_files[@]}" | sort))
+IFS=$'\n'
+compose_files=($(printf '%s\n' "${compose_files[@]}" | sort))
 IFS=$oldIFS
 
 printf '%-60s %-8s\n' "PROJECT" "STATUS"
@@ -24,24 +25,24 @@ printf '%-60s %-8s\n' "---------------------------------------------------------
 for file in "${compose_files[@]}"; do
   dir=$(dirname "$file")
   # include stopped/created containers for this compose project
-  ids=$(docker compose -f "$file" ps -a -q 2>/dev/null || true)
+  container_ids=$(docker compose -f "$file" ps -a -q 2>/dev/null || true)
   running=0
 
-  if [ -n "$ids" ]; then
-    for id in $ids; do
-      st=$(docker inspect -f '{{.State.Status}}' "$id" 2>/dev/null || echo unknown)
-      startedAt=$(docker inspect -f '{{.State.StartedAt}}' "$id" 2>/dev/null || echo '')
+  if [ -n "$container_ids" ]; then
+    for id in $container_ids; do
+      current_state=$(docker inspect -f '{{.State.Status}}' "$id" 2>/dev/null || echo unknown)
+      started_at=$(docker inspect -f '{{.State.StartedAt}}' "$id" 2>/dev/null || echo '')
 
       # If container is not running but has been started before, start it
-      if [ "$st" != "running" ]; then
-        if [ -n "$startedAt" ] && [ "$startedAt" != "0001-01-01T00:00:00Z" ]; then
+      if [ "$current_state" != "running" ]; then
+        if [ -n "$started_at" ] && [ "$started_at" != "0001-01-01T00:00:00Z" ]; then
           docker start "$id" >/dev/null 2>&1 || true
           # re-evaluate state
-          st=$(docker inspect -f '{{.State.Status}}' "$id" 2>/dev/null || echo unknown)
+          current_state=$(docker inspect -f '{{.State.Status}}' "$id" 2>/dev/null || echo unknown)
         fi
       fi
 
-      if [ "$st" = "running" ]; then
+      if [ "$current_state" = "running" ]; then
         running=$((running+1))
       fi
     done
