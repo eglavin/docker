@@ -4,6 +4,6 @@
 # Except these files
 !.gitignore
 !.env.example
-!docker-compose.env
+!docker-compose.env.example
 !docker-compose.yml
 !README.md
