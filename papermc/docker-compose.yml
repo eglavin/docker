@@ -10,14 +10,25 @@ services:
     stdin_open: true
     ports:
       - "25565:25565"
+      - "19132:19132/udp"
+    volumes:
+      - ./data:/data
+      - ./plugins:/plugins
     environment:
-      UID: "0"
-      GID: "0"
+      UID: ${UID}
+      GID: ${GID}
       MEMORY: "4096M"
       TYPE: "PAPER"
       EULA: "TRUE"
       USE_AIKAR_FLAGS: "true"
       USE_MEOWICE_FLAGS: "true"
       LEVEL: "world-2026"
-    volumes:
-      - ./data:/data
+      MODRINTH_PROJECTS: |
+        viaversion
+        viabackwards
+        vaultunlocked
+        essentialsx
+        essentialsx-spawn
+
+      # Disabled modrinth projects
+      # geyser
