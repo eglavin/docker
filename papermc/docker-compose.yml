@@ -9,6 +9,7 @@ services:
     tty: true
     stdin_open: true
     ports:
+      - "8100:8100"
       - "25565:25565"
       - "19132:19132/udp"
     volumes:
@@ -32,6 +33,7 @@ services:
         multiverse-core
         multiverse-netherportals
         multiverse-signportals
+        bluemap
 
   papermcbackup:
     image: itzg/mc-backup # https://github.com/itzg/docker-mc-backup
@@ -55,4 +57,4 @@ services:
       NAME_WITH_VERSION: true
       RCLONE_REMOTE: "mcbackup-sftp"
       RCLONE_DEST_DIR: ${RCLONE_DEST_DIR}
-      EXCLUDES: ""
+      EXCLUDES: "bluemap"
