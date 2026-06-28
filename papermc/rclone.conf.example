@@ -1,0 +1,7 @@
+[mcbackup-sftp]
+type = sftp
+host =
+user =
+port = 22
+pass =
+use_insecure_cipher = false

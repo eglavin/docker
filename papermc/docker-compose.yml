@@ -10,14 +10,49 @@ services:
     stdin_open: true
     ports:
       - "25565:25565"
+      - "19132:19132/udp"
+    volumes:
+      - ./data:/data
     environment:
-      UID: "0"
-      GID: "0"
+      UID: ${UID}
+      GID: ${GID}
       MEMORY: "4096M"
       TYPE: "PAPER"
       EULA: "TRUE"
       USE_AIKAR_FLAGS: "true"
       USE_MEOWICE_FLAGS: "true"
       LEVEL: "world-2026"
+      MODRINTH_PROJECTS: |
+        viaversion
+        viabackwards
+        vaultunlocked
+        luckperms
+        essentialsx
+        essentialsx-spawn
+        multiverse-core
+        multiverse-netherportals
+        multiverse-signportals
+
+  papermcbackup:
+    image: itzg/mc-backup # https://github.com/itzg/docker-mc-backup
+    container_name: papermc_backup
+    restart: unless-stopped
+    depends_on:
+      papermc:
+        condition: service_healthy
     volumes:
-      - ./data:/data
+      - ./data:/data:ro
+      - ./backups:/backups
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./rclone.conf:/config/rclone/rclone.conf:ro
+    environment:
+      SRC_DIR: /data
+      DEST_DIR: /backups
+      RCON_HOST: papermc
+      BACKUP_METHOD: "rclone"
+      BACKUP_INTERVAL: "24h"
+      PRUNE_BACKUPS_DAYS: 20
+      NAME_WITH_VERSION: true
+      RCLONE_REMOTE: "mcbackup-sftp"
+      RCLONE_DEST_DIR: ${RCLONE_DEST_DIR}
+      EXCLUDES: ""
