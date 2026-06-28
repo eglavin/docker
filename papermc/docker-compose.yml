@@ -55,3 +55,4 @@ services:
       NAME_WITH_VERSION: true
       RCLONE_REMOTE: "mcbackup-sftp"
       RCLONE_DEST_DIR: ${RCLONE_DEST_DIR}
+      EXCLUDES: ""
