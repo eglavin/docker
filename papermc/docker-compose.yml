@@ -13,7 +13,6 @@ services:
       - "19132:19132/udp"
     volumes:
       - ./data:/data
-      - ./plugins:/plugins
     environment:
       UID: ${UID}
       GID: ${GID}
@@ -33,3 +32,26 @@ services:
         multiverse-core
         multiverse-netherportals
         multiverse-signportals
+
+  papermcbackup:
+    image: itzg/mc-backup # https://github.com/itzg/docker-mc-backup
+    container_name: papermc_backup
+    restart: unless-stopped
+    depends_on:
+      papermc:
+        condition: service_healthy
+    volumes:
+      - ./data:/data:ro
+      - ./backups:/backups
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./rclone.conf:/config/rclone/rclone.conf:ro
+    environment:
+      SRC_DIR: /data
+      DEST_DIR: /backups
+      RCON_HOST: papermc
+      BACKUP_METHOD: "rclone"
+      BACKUP_INTERVAL: "24h"
+      PRUNE_BACKUPS_DAYS: 20
+      NAME_WITH_VERSION: true
+      RCLONE_REMOTE: "mcbackup-sftp"
+      RCLONE_DEST_DIR: ${RCLONE_DEST_DIR}
