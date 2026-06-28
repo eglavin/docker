@@ -23,14 +23,9 @@ Current
 - <https://modrinth.com/plugin/viaversion>
 - <https://modrinth.com/plugin/viabackwards>
 - <https://modrinth.com/plugin/vaultunlocked>
+- <https://modrinth.com/plugin/luckperms>
 - <https://modrinth.com/plugin/essentialsx>
 - <https://modrinth.com/plugin/essentialsx-spawn>
-- <https://modrinth.com/plugin/geyser>
-- <https://modrinth.com/mod/floodgate>
-
-Maybe
-
-- <https://github.com/Multiverse>
-- <https://github.com/dmulloy2/ProtocolLib>
-- <https://github.com/lucko/spark>
-- <https://hangar.papermc.io/EngineHub/WorldEdit>
+- <https://modrinth.com/plugin/multiverse-core>
+- <https://modrinth.com/plugin/multiverse-netherportals>
+- <https://modrinth.com/plugin/multiverse-signportals>

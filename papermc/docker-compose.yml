@@ -27,8 +27,9 @@ services:
         viaversion
         viabackwards
         vaultunlocked
+        luckperms
         essentialsx
         essentialsx-spawn
-
-      # Disabled modrinth projects
-      # geyser
+        multiverse-core
+        multiverse-netherportals
+        multiverse-signportals
