@@ -26,6 +26,7 @@ services:
       ENABLE_WHITELIST: "true"
       WHITELIST: ${WHITELIST}
       OPS: ${OPS}
+      MOTD: ${MOTD}
       DIFFICULTY: ${DIFFICULTY}
       MODRINTH_PROJECTS: |
         viaversion
