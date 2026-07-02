@@ -39,6 +39,7 @@ services:
         multiverse-netherportals
         multiverse-signportals
         bluemap
+        geyser:mGm9X2Fe
 
   papermcbackup:
     image: itzg/mc-backup # https://github.com/itzg/docker-mc-backup
@@ -58,6 +59,8 @@ services:
       RCON_HOST: papermc
       BACKUP_METHOD: "rclone"
       BACKUP_INTERVAL: "24h"
+      BACKUP_ON_STARTUP: false
+      PAUSE_IF_NO_PLAYERS: true
       PRUNE_BACKUPS_DAYS: 20
       NAME_WITH_VERSION: true
       RCLONE_REMOTE: "mcbackup-sftp"
