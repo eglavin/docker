@@ -49,20 +49,21 @@ services:
       papermc:
         condition: service_healthy
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
       - ./data:/data:ro
       - ./backups:/backups
-      - /var/run/docker.sock:/var/run/docker.sock
       - ./rclone.conf:/config/rclone/rclone.conf:ro
     environment:
       SRC_DIR: /data
       DEST_DIR: /backups
       RCON_HOST: papermc
       BACKUP_METHOD: "rclone"
-      BACKUP_INTERVAL: "24h"
-      BACKUP_ON_STARTUP: false
-      PAUSE_IF_NO_PLAYERS: true
       PRUNE_BACKUPS_DAYS: 20
       NAME_WITH_VERSION: true
       RCLONE_REMOTE: "mcbackup-sftp"
       RCLONE_DEST_DIR: ${RCLONE_DEST_DIR}
       EXCLUDES: "bluemap"
+      CRON_SCHEDULE: "0 4 * * *"
+      CRON_BACKUP_UID: ${UID}
