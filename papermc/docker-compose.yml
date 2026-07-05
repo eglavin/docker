@@ -14,6 +14,7 @@ services:
       - "19132:19132/udp"
     volumes:
       - ./data:/data
+      - ./icon.png:/icon.png
     environment:
       UID: ${UID}
       GID: ${GID}
@@ -23,6 +24,8 @@ services:
       USE_AIKAR_FLAGS: "true"
       USE_MEOWICE_FLAGS: "true"
       LEVEL: "world-2026"
+      ICON: /icon.png
+      OVERRIDE_ICON: true
       ENABLE_WHITELIST: "true"
       WHITELIST: ${WHITELIST}
       OPS: ${OPS}
