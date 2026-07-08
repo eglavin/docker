@@ -43,6 +43,7 @@ services:
         multiverse-signportals
         bluemap
         geyser:mGm9X2Fe
+        worldedit
 
   papermcbackup:
     image: itzg/mc-backup # https://github.com/itzg/docker-mc-backup
