@@ -20,6 +20,7 @@ services:
       GID: ${GID}
       MEMORY: "4096M"
       TYPE: "PAPER"
+      VERSION: ${VERSION:-latest}
       EULA: "TRUE"
       USE_AIKAR_FLAGS: "true"
       USE_MEOWICE_FLAGS: "true"
@@ -42,7 +43,6 @@ services:
         multiverse-netherportals
         multiverse-signportals
         bluemap
-        geyser:mGm9X2Fe
         worldedit
 
   papermcbackup:
