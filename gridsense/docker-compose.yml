@@ -1,0 +1,15 @@
+name: gridsense
+
+services:
+  gridsense:
+    image: ghcr.io/eglavin/gridsense:latest
+    container_name: gridsense
+    restart: unless-stopped
+    environment:
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?set a long random secret}
+      BETTER_AUTH_URL: ${BETTER_AUTH_URL}
+      ENABLE_SIGN_UP: ${ENABLE_SIGN_UP}
+    volumes:
+      - ./data:/app/data
+    ports:
+      - "3000:3000"
