@@ -1,3 +1,5 @@
+name: komodo
+
 services:
   postgres:
     # 🚨 Pin to a specific version. Updates can be breaking.
@@ -37,6 +39,7 @@ services:
       - ferretdb
     ports:
       - 9120:9120
+    env_file: ./.env
     environment:
       KOMODO_DATABASE_ADDRESS: ferretdb:27017
     volumes:
@@ -49,6 +52,7 @@ services:
     restart: unless-stopped
     depends_on:
       - core
+    env_file: ./.env
     volumes:
       - keys:/config/keys
       - /var/run/docker.sock:/var/run/docker.sock
